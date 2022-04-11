@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./models/product.class.js"></script>
+    <script src="./classes/men.class.js"></script>
+    <script src="./classes/woman.class.js"></script>
+    <script src="./classes/shopping-cart.class.js"></script>
+    <script src="./main.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body onload="init()">
+    <div class="navbar">
+        <img class="logo" src="./img/logo.png">
+        <div class="basket-box" id="basket-icon" onclick="openBasket()">
+            <img class="basket-img" src="./img/basket.png">
+            <div id="basket-number" class="basket-number">0</div>
+        </div>
+    </div>
+    <div class="shopping-basket d-none" id="shopping-basket">
+        <h2 class="shopping-basket-headline">Warenkorb</h2>
+        <div id="shopping-basket-product-box">
+            
+        </div>
+        <div class="shopping-basket-footer">
+            <div class="shopping-basket-totals">
+                <h3>Zwischensumme</h3>
+                <div class="shopping-basket-totals-numbers">
+                    <div id="subtotal" class="shopping-basket-totals-numbers">
+
+                    </div>
+                    <span>
+                        €
+                    </span>
+                </div>
+            </div>
+            <div class="shopping-basket-totals">
+                <h3>Lieferkosten</h3>
+                <div class="shopping-basket-totals-numbers">
+                    <div id="delivery" class="shopping-basket-totals-numbers">
+
+                    </div>
+                    <span>
+                        €
+                    </span>
+                </div>
+            </div>
+            <div class="shopping-basket-totals">
+                <h3>Gesamt</h3>
+                <div class="shopping-basket-totals-numbers">
+                    <div id="total" class="shopping-basket-totals-numbers">
+
+                    </div>
+                    <span>
+                        €
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="categorys">
+        <div onclick="decideCategory('men')" class="category-element">Men</div>
+        <div onclick="decideCategory('women')" class="category-element">Women</div>
+    </div>
+    <div id="products-container" class="products-container">
+        
+    </div>
+</body>
+</html>
