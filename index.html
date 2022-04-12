@@ -18,11 +18,14 @@
 </head>
 <body onload="init()">
     <div class="navbar">
-        <img class="logo" src="./img/logo.png">
-        <div class="basket-box" id="basket-icon" onclick="openBasket()">
-            <img class="basket-img" src="./img/basket.png">
-            <div id="basket-number" class="basket-number">0</div>
+        <div class="primary-container navbar-container">
+            <img class="logo" src="./img/logo.png">
+            <div class="basket-box" id="basket-icon" onclick="openBasket()">
+                <img class="basket-img" src="./img/basket.png">
+                <div id="basket-number" class="basket-number">0</div>
+            </div>
         </div>
+        
     </div>
     <div class="shopping-basket d-none" id="shopping-basket">
         <h2 class="shopping-basket-headline">Warenkorb</h2>
@@ -92,12 +95,16 @@
         
     </div>
 
-    <div class="categorys">
+    <div class="categorys primary-container">
+        <div onclick="decideCategory('all')" class="category-element">All</div>
         <div onclick="decideCategory('men')" class="category-element">Men</div>
         <div onclick="decideCategory('women')" class="category-element">Women</div>
     </div>
-    <div id="products-container" class="products-container">
+    <div class="primary-container">
+        <div id="products-container" class="products-container">
         
+        </div>
     </div>
+    
 </body>
 </html>

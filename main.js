@@ -64,7 +64,7 @@ function productsHTML(product){
                 <div>
                     <h3 class="product-name">${product['name']}</h3>
                     <h3 class="product-price">
-                        Preis <span>${product['price']}</span>
+                        <span class="product-price-text">Preis</span> <span>${product['price']}</span> €
                     </h3>
                 </div>
                 <div onclick="shoppingCart.addToBasket(${product['id']})" id="product-${product}" class="product-plus-img-outer">

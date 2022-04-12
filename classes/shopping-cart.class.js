@@ -131,12 +131,14 @@ class ShoppingCart {
                 <div onclick="shoppingCart.reduce(${i})" class="shopping_basket-icon-container shopping_basket-icon-container-minus">
                     <img class="shopping_basket-icon-minus shopping_basket-icon" src="./img/minus.png">
                 </div>
-                <div onclick="shoppingCart.increase(${i})" class="shopping_basket-icon-container">
+                <div onclick="shoppingCart.increase(${i})" class="shopping_basket-icon-container shopping_basket-icon-container-plus">
                     <img class="shopping_basket-icon-plus shopping_basket-icon" src="./img/plus.png">
                 </div>
             </div>
             <div class="shopping_basket-price">${(Math.round(product['price'] * 100) / 100).toFixed(2)} €</div>
-            <img onclick="shoppingCart.deleteProduct(${i})" class="shopping_basket-icon-trash" src="./img/trash.png">
+            <div class="shopping_basket-icon-trash-outer">
+                <img onclick="shoppingCart.deleteProduct(${i})" class="shopping_basket-icon-trash" src="./img/trash.png">
+            </div>
         </div>
     `;
     }
