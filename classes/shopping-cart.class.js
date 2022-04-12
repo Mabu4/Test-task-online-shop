@@ -1,19 +1,24 @@
 class ShoppingCart {
 
     productsInCart = [];
-
+    subtotal;
+    total;
+    discount = 0;
+    discountSum;
     delivery = 5;
+    currentProduct;
+    currentStandardProduct;
 
     addToBasket(id){
         // Search for the new product in Array
         let newProduct = allProducts.find((item) => item.id == id);
         // Find the duplicate in the Shopping Basket
         let duplicate = this.productsInCart.find((item) => item.id == id);
-        
+        // if the product exist in shopping basket
         if(duplicate){
             duplicate['price'] = duplicate['price'] + newProduct['price'];
             duplicate['quantity'] = duplicate['quantity'] + 1; 
-        } else {
+        } else { //push it in the Cart
             this.productsInCart.push(JSON.parse(JSON.stringify(newProduct)));
         }
 
@@ -22,17 +27,49 @@ class ShoppingCart {
 
 
     loadBasket(){
-        document.getElementById('shopping-basket-product-box').innerHTML = '';
-        document.getElementById('basket-number').innerHTML = 0;
+        document.getElementById('shopping-basket-product-box').innerHTML = ''; // reset the shopping basket
+        document.getElementById('basket-number').innerHTML = 0; //total number on the basket img
 
         for (let i = 0; i < this.productsInCart.length; i++) {
             let product = this.productsInCart[i];
         
-            document.getElementById('basket-number').innerHTML = i + 1;
+            document.getElementById('basket-number').innerHTML = i + 1; //total number on the basket img (+1 because i starts with 0)
             document.getElementById('shopping-basket-product-box').innerHTML += 
                 this.loadBasketHTML(product, i);
         }
         this.calculateTotals();
+    }
+
+
+    calculateTotals() {
+        //calc subtotal
+        this.subtotal = this.productsInCart.reduce((preValue, item) => {
+            return item['price'] + preValue; //Der return wird immer wieder an den nächsten Durchlauf übergeben
+        }, 0) //Startwert
+        //calc discountSum
+        this.discountSum = this.subtotal / (100 + this.discount) * this.discount;
+        //calc total and calc free shipping, when subtotal is more or less than 50
+        if (this.subtotal < 50) {
+            this.delivery = 5;
+            this.total = this.subtotal - this.discountSum + this.delivery;
+        } else if (this.subtotal > 50){
+            this.delivery = 0;
+            this.total = this.subtotal - this.discountSum;
+        }
+        this.roundedTotalsAndRender();
+    }
+
+
+    roundedTotalsAndRender() {
+        let roundedSubtotal = (Math.round(this.subtotal * 100) / 100).toFixed(2);
+        let roundedDelivery = (Math.round(this.delivery * 100) / 100).toFixed(2);
+        let roundedDiscount = (Math.round(this.discountSum * 100) / 100).toFixed(2);
+        let roundedTotal = (Math.round(this.total * 100) / 100).toFixed(2);
+
+        document.getElementById('subtotal').innerHTML = roundedSubtotal;
+        document.getElementById('delivery').innerHTML = roundedDelivery;
+        document.getElementById('discount').innerHTML = roundedDiscount;
+        document.getElementById('total').innerHTML = roundedTotal;
     }
 
 
@@ -43,52 +80,45 @@ class ShoppingCart {
 
 
     reduce(i) {
-        let product = this.productsInCart[i];
-        let productID = product['id'];
-        let standardProduct = allProducts.find((item) => item.id == productID);
-
-        if(product['quantity'] > 1){
-            product['price'] = product['price'] - standardProduct['price'];
-            product['quantity'] = product['quantity'] - 1;
+        this.findProducts(i);
+        // if the product is in the basket more than once 
+        if(this.currentProduct['quantity'] > 1){
+            this.currentProduct['price'] = this.currentProduct['price'] - this.currentStandardProduct['price']; //calc new price
+            this.currentProduct['quantity'] = this.currentProduct['quantity'] - 1; //calc new quantity
             this.loadBasket();
-        } else {
+        } else { // if the product is present only once
             this.deleteProduct(i)
         }
     }
 
 
     increase(i) {
-        let product = this.productsInCart[i];
-        let productID = product['id'];
-        let standardProduct = allProducts.find((item) => item.id == productID);
-
-        product['price'] = product['price'] + standardProduct['price'];
-        product['quantity'] = product['quantity'] + 1;
+        this.findProducts(i);
+        this.currentProduct['price'] = this.currentProduct['price'] + this.currentStandardProduct['price'];
+        this.currentProduct['quantity'] = this.currentProduct['quantity'] + 1;
         this.loadBasket();
     }
 
 
-    calculateTotals() {
-        let subtotal = this.productsInCart.reduce((preValue, item) => {
-            return item['price'] + preValue; //Der return wird immer wieder an den nächsten Durchlauf übergeben
-        }, 0) //Startwert
+    findProducts(i){
+        this.currentProduct = this.productsInCart[i]; //find product
+        let productID = this.currentProduct['id']; //find product id
+        this.currentStandardProduct = allProducts.find((item) => item.id == productID); //find product in allProducts to calculate the new prices
+    }
 
-        let total;
-        if (subtotal < 50) {
-            this.delivery = 5;
-            total = this.delivery + subtotal;
-        } else if (subtotal > 50){
-            total = subtotal;
-            this.delivery = 0;
-        }
 
-        let roundedSubtotal = (Math.round(subtotal * 100) / 100).toFixed(2);
-        let roundedDelivery = (Math.round(this.delivery * 100) / 100).toFixed(2);
-        let roundedTotal = (Math.round(total * 100) / 100).toFixed(2);
+    addDiscount(discount){
+        this.discount = discount;
+        this.calculateTotals();
+        this.setDiscountButtonColor();
+    }
 
-        document.getElementById('subtotal').innerHTML = roundedSubtotal;
-        document.getElementById('delivery').innerHTML = roundedDelivery;
-        document.getElementById('total').innerHTML = roundedTotal;
+
+    setDiscountButtonColor(){
+        document.getElementById('button-10').style.backgroundColor = 'transparent';
+        document.getElementById('button-20').style.backgroundColor = 'transparent';
+        document.getElementById('button-30').style.backgroundColor = 'transparent';
+        document.getElementById('button-' + this.discount).style.backgroundColor = 'rgb(234, 234, 234)';
     }
 
 
@@ -111,5 +141,4 @@ class ShoppingCart {
     `;
     }
     
-
 }

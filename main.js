@@ -63,14 +63,12 @@ function productsHTML(product){
             <div class="product-footer">
                 <div>
                     <h3 class="product-name">${product['name']}</h3>
-                </div>
-                <div class="product-footer-section2">
                     <h3 class="product-price">
                         Preis <span>${product['price']}</span>
                     </h3>
-                    <div onclick="shoppingCart.addToBasket(${product['id']})" id="product-${product}" class="product-plus-img-outer">
-                        <img class="product-plus-img" src="./img/plus.png">
-                    </div>
+                </div>
+                <div onclick="shoppingCart.addToBasket(${product['id']})" id="product-${product}" class="product-plus-img-outer">
+                    <img class="product-plus-img" src="./img/plus.png">
                 </div>
             </div>
         </div>

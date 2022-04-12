@@ -26,44 +26,70 @@
     </div>
     <div class="shopping-basket d-none" id="shopping-basket">
         <h2 class="shopping-basket-headline">Warenkorb</h2>
-        <div id="shopping-basket-product-box">
+        <div class="shopping-basket-container">
+            <div id="shopping-basket-product-box">
             
+            </div>
+            <div class="shopping-basket-footer">
+                <h3>Rabatte</h3>
+                <div class="button-box">
+                    <div onclick="shoppingCart.addDiscount(10)" class="button" id="button-10">
+                        10%
+                    </div>
+                    <div onclick="shoppingCart.addDiscount(20)" class="button" id="button-20">
+                        20%
+                    </div>
+                    <div onclick="shoppingCart.addDiscount(30)" class="button" id="button-30">
+                        30%
+                    </div>
+                </div>
+                <div class="shopping-basket-totals">
+                    <h3 class="shopping-basket-totals-headline">Zwischensumme</h3>
+                    <div class="shopping-basket-totals-numbers">
+                        <div id="subtotal" class="shopping-basket-totals-numbers">
+    
+                        </div>
+                        <span>
+                            €
+                        </span>
+                    </div>
+                </div>
+                <div class="shopping-basket-totals">
+                    <h3 class="shopping-basket-totals-headline">Lieferkosten</h3>
+                    <div class="shopping-basket-totals-numbers">
+                        <div id="delivery" class="shopping-basket-totals-numbers">
+    
+                        </div>
+                        <span>
+                            €
+                        </span>
+                    </div>
+                </div>
+                <div class="shopping-basket-totals">
+                    <h3 class="shopping-basket-totals-headline">Rabatt</h3>
+                    <div class="shopping-basket-totals-numbers">
+                        <div id="discount" class="shopping-basket-totals-numbers">
+    
+                        </div>
+                        <span>
+                            €
+                        </span>
+                    </div>
+                </div>
+                <div class="shopping-basket-totals">
+                    <h3 class="shopping-basket-totals-headline shopping-basket-totals-headline-last">Gesamt</h3>
+                    <div class="shopping-basket-totals-numbers">
+                        <div id="total" class="shopping-basket-totals-numbers">
+    
+                        </div>
+                        <span>
+                            €
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="shopping-basket-footer">
-            <div class="shopping-basket-totals">
-                <h3>Zwischensumme</h3>
-                <div class="shopping-basket-totals-numbers">
-                    <div id="subtotal" class="shopping-basket-totals-numbers">
-
-                    </div>
-                    <span>
-                        €
-                    </span>
-                </div>
-            </div>
-            <div class="shopping-basket-totals">
-                <h3>Lieferkosten</h3>
-                <div class="shopping-basket-totals-numbers">
-                    <div id="delivery" class="shopping-basket-totals-numbers">
-
-                    </div>
-                    <span>
-                        €
-                    </span>
-                </div>
-            </div>
-            <div class="shopping-basket-totals">
-                <h3>Gesamt</h3>
-                <div class="shopping-basket-totals-numbers">
-                    <div id="total" class="shopping-basket-totals-numbers">
-
-                    </div>
-                    <span>
-                        €
-                    </span>
-                </div>
-            </div>
-        </div>
+        
     </div>
 
     <div class="categorys">
